@@ -1,6 +1,6 @@
 # Candy-Machine-V2-Mint
 
-The Candy-Machine-V2-Mint project is a modified [Candy-Machine-Mint](https://github.com/exiled-apes/candy-machine-mint) frontend that works with the latest Candy Machine V2 program. 
+The Candy-Machine-V2-Mint project is a modified [Candy-Machine-Mint](https://github.com/exiled-apes/candy-machine-mint) frontend that works with the latest Candy Machine V2 program on Solana. 
 
 For instructions on how to set up a v2 candy machine, please refer to Metaplex's documentation [here](https://docs.metaplex.com/candy-machine-v2/Introduction)
 
@@ -29,7 +29,7 @@ The Candy-Machine-Mint project is meant to be as simple and usable as possible, 
 
 1. Fork the project, then clone down. Example:
 ```
-git clone git@github.com:exiled-apes/candy-machine-mint.git
+git clone git@github.com:Soul-Dogs-City/candy-machine-v2-mint.git
 ```
 
 2. Build the project. Example:
