@@ -1,6 +1,12 @@
-# Candy-Machine-Mint
+# Candy-Machine-V2-Mint
 
-The Candy-Machine-Mint project is designed to let users fork, customize, and deploy their own candy machine mint app to a custom domain, ultra fast.
+The Candy-Machine-V2-Mint project is a modified [Candy-Machine-Mint](https://github.com/exiled-apes/candy-machine-mint) frontend that works with the latest Candy Machine V2 program. 
+
+For instructions on how to set up a v2 candy machine, please refer to Metaplex's documentation [here](https://docs.metaplex.com/candy-machine-v2/Introduction)
+
+## Candy-Machine-Mint
+
+The [Candy-Machine-Mint](https://github.com/exiled-apes/candy-machine-mint) project is designed to let users fork, customize, and deploy their own candy machine mint app to a custom domain, ultra fast.
 
 A candy machine is an on-chain Solana program (or smart contract) for managing fair mint. Fair mints:
 * Start and finish at the same time for everyone.
@@ -40,28 +46,11 @@ yarn build
 To run the project, first rename the `.env.example` file at the root directory to `.env` and update the following variables:
 
 ```
-REACT_APP_CANDY_MACHINE_CONFIG=__PLACEHOLDER__
-```
-
-This is a Solana account address. You can get the value for this from the `.cache/temp` file. This file is created when you run the `metaplex upload` command in terminal.
-
-```
 REACT_APP_CANDY_MACHINE_ID=__PLACEHOLDER__
 ```
 
-Same as above; this is a Solana account address. You can get the value for this from the `./cache/temp` file. This file is created when you run the `metaplex upload` command in terminal.
+This is a Solana account address. You can get the value for this from the `./cache/temp` file. This file is created when you run the `ts-node candy-machine-v2-cli.ts upload` command in terminal.
 
-```
-REACT_APP_TREASURY_ADDRESS=__PLACEHOLDER__
-```
-
-This the Solana address that receives the funds gathered during the minting process. More docs coming as we can test this.
-
-```
-REACT_APP_CANDY_START_DATE=__PLACEHOLDER__
-```
-
-This is a unix time stamp that configures when your mint will be open.
 
 ```
 REACT_APP_SOLANA_NETWORK=devnet
@@ -70,7 +59,7 @@ REACT_APP_SOLANA_NETWORK=devnet
 This identifies the Solana network you want to connect to. Options are `devnet`, `testnet`, and `mainnet`.
 
 ```
-REACT_APP_SOLANA_RPC_HOST=https://explorer-api.devnet.solana.com
+REACT_APP_SOLANA_RPC_HOST=https://api.devnet.solana.com
 ```
 
 This identifies the RPC server your web app will access the Solana network through.
