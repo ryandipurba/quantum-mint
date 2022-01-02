@@ -34,7 +34,7 @@ git clone git@github.com:Soul-Dogs-City/candy-machine-v2-mint.git
 
 2. Build the project. Example:
 ```
-cd candy-machine-mint
+cd candy-machine-v2-mint
 yarn install
 yarn build
 ```
@@ -49,7 +49,7 @@ To run the project, first rename the `.env.example` file at the root directory t
 REACT_APP_CANDY_MACHINE_ID=__PLACEHOLDER__
 ```
 
-This is a Solana account address. You can get the value for this from the `./cache/temp` file. This file is created when you run the `ts-node candy-machine-v2-cli.ts upload` command in terminal.
+This is a Solana account address. You can get the value for this from the `.cache/temp.json` file. This file is created when you run the `ts-node candy-machine-v2-cli.ts upload` command in terminal.
 
 
 ```

@@ -24,33 +24,38 @@ export const MintButton = ({
 }) => {
     const { requestGatewayToken, gatewayStatus } = useGateway();
     const [clicked, setClicked] = useState(false);
+    const [isVerifying, setIsVerifying] = useState(false);
     const [isActive, setIsActive] = useState(false); // true when countdown completes
 
     useEffect(() => {
-        if (gatewayStatus === GatewayStatus.ACTIVE && clicked) {
-            console.log('Minting');
+        setIsVerifying(false);
+        if (gatewayStatus === GatewayStatus.COLLECTING_USER_INFORMATION && clicked) {
+            // when user approves wallet verification txn
+            setIsVerifying(true);
+        }
+        else if (gatewayStatus === GatewayStatus.ACTIVE && clicked) {
+            console.log('Verified human, now minting...');
             onMint();
             setClicked(false);
         }
     }, [gatewayStatus, clicked, setClicked, onMint]);
+
     return (
         <CTAButton
             disabled={
                 candyMachine?.state.isSoldOut ||
                 isMinting ||
-                !isActive
+                !isActive ||
+                isVerifying
             }
             onClick={async () => {
-                setClicked(true);
-                if (isActive && candyMachine?.state.gatekeeper) {
-                    if (gatewayStatus === GatewayStatus.ACTIVE) {
-                        setClicked(true);
-                    } else {
-                        await requestGatewayToken();
-                    }
+                if (isActive && candyMachine?.state.gatekeeper && gatewayStatus !== GatewayStatus.ACTIVE) {
+                    console.log('Requesting gateway token');
+                    setClicked(true);
+                    await requestGatewayToken();
                 } else {
+                    console.log('Minting...');
                     await onMint();
-                    setClicked(false);
                 }
             }}
             variant="contained"
@@ -60,11 +65,12 @@ export const MintButton = ({
             ) : candyMachine?.state.isSoldOut ? (
                 'SOLD OUT'
             ) : isActive ? (
-                isMinting ? (
-                    <CircularProgress />
-                ) : (
-                    "MINT"
-                )
+                isVerifying ? 'VERIFYING...' :
+                    isMinting ? (
+                        <CircularProgress />
+                    ) : (
+                        "MINT"
+                    )
             ) : (candyMachine?.state.goLiveDate ? (
                 <Countdown
                     date={toDate(candyMachine?.state.goLiveDate)}
