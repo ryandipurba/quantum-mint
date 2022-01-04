@@ -13,7 +13,7 @@ export default function Mint() {
         </div>
         <div class="col-md-6">
           <h1 className="tittle display-4 mb-3">
-            Welcom To Quantum World Nft Version 2.0
+            Welcome To Quantum World Nft Version 2.0
           </h1>
           <h3 className="text-justify desc">
             Mint your version 2.0 quantum motorcycle NFT Art , get a 10%
