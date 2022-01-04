@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Snackbar } from "@material-ui/core";
@@ -9,8 +10,8 @@ import { LAMPORTS_PER_SOL, PublicKey } from "@solana/web3.js";
 
 import { useAnchorWallet } from "@solana/wallet-adapter-react";
 import { WalletDialogButton } from "@solana/wallet-adapter-material-ui";
-import { GatewayProvider } from '@civic/solana-gateway-react';
-import { MintButton } from './MintButton';
+import { GatewayProvider } from "@civic/solana-gateway-react";
+import { MintButton } from "./MintButton";
 
 import {
   CandyMachine,
@@ -25,7 +26,13 @@ import { AlertState } from "./utils";
 
 const ConnectButton = styled(WalletDialogButton)``;
 
-const MintContainer = styled.div``; // add your styles here
+const MintContainer = styled.div`
+  backgroundColor: "#43beeb",
+  fontSize: "20px",
+  fontFamily: "Bbc, sans-serif",
+  minWidth: "150px",
+  color: "white",
+  justifyContent: "center",`; // add your styles here
 
 export interface HomeProps {
   candyMachineId: anchor.web3.PublicKey;
@@ -78,7 +85,7 @@ const Home = (props: HomeProps) => {
   const onMint = async () => {
     try {
       setIsMinting(true);
-      document.getElementById('#identity')?.click();
+      document.getElementById("#identity")?.click();
       if (wallet && candyMachine?.program && wallet.publicKey) {
         const mintTxId = (
           await mintOneToken(candyMachine, wallet.publicKey)
@@ -90,35 +97,35 @@ const Home = (props: HomeProps) => {
             mintTxId,
             props.txTimeout,
             props.connection,
-            'singleGossip',
-            true,
+            "singleGossip",
+            true
           );
         }
 
         if (!status?.err) {
           setAlertState({
             open: true,
-            message: 'Congratulations! Mint succeeded!',
-            severity: 'success',
+            message: "Congratulations! Mint succeeded!",
+            severity: "success",
           });
         } else {
           setAlertState({
             open: true,
-            message: 'Mint failed! Please try again!',
-            severity: 'error',
+            message: "Mint failed! Please try again!",
+            severity: "error",
           });
         }
       }
     } catch (error: any) {
       // TODO: blech:
-      let message = error.msg || 'Minting failed! Please try again!';
+      let message = error.msg || "Minting failed! Please try again!";
       if (!error.msg) {
         if (!error.message) {
-          message = 'Transaction Timeout! Please try again.';
-        } else if (error.message.indexOf('0x138')) {
-        } else if (error.message.indexOf('0x137')) {
+          message = "Transaction Timeout! Please try again.";
+        } else if (error.message.indexOf("0x138")) {
+        } else if (error.message.indexOf("0x137")) {
           message = `SOLD OUT!`;
-        } else if (error.message.indexOf('0x135')) {
+        } else if (error.message.indexOf("0x135")) {
           message = `Insufficient funds to mint. Please fund your wallet.`;
         }
       } else {
@@ -161,31 +168,44 @@ const Home = (props: HomeProps) => {
 
   return (
     <main>
-      {wallet && (
+      {/* {wallet && (
         <p>Wallet {shortenAddress(wallet.publicKey.toBase58() || "")}</p>
+      )} */}
+
+      {/* {wallet && <p>Balance: {(balance || 0).toLocaleString()} SOL</p>} */}
+
+      {wallet && (
+        <h3 style={{ textShadow: "1px 1px #0c0c0c" }}>
+          {itemsRedeemed} / {itemsAvailable} Minted
+        </h3>
       )}
-
-      {wallet && <p>Balance: {(balance || 0).toLocaleString()} SOL</p>}
-
-      {wallet && <p>Total Available: {itemsAvailable}</p>}
-
+      {/* 
       {wallet && <p>Redeemed: {itemsRedeemed}</p>}
 
-      {wallet && <p>Remaining: {itemsRemaining}</p>}
+      {wallet && <p>Remaining: {itemsRemaining}</p>} */}
 
-      {<MintContainer>
-        {!wallet ? (
-          <ConnectButton>Connect Wallet</ConnectButton>
-        ) :
-          isActive &&
+      {
+        <MintContainer>
+          {!wallet ? (
+            <ConnectButton
+              style={{
+                backgroundColor: "#43beeb",
+                fontSize: "20px",
+                fontFamily: "Bbc, sans-serif",
+                minWidth: "150px",
+                justifyContent: "center",
+              }}
+            >
+              Connect Wallet
+            </ConnectButton>
+          ) : isActive &&
             candyMachine?.state.gatekeeper &&
             wallet.publicKey &&
             wallet.signTransaction ? (
             <GatewayProvider
               wallet={{
                 publicKey:
-                  wallet.publicKey ||
-                  new PublicKey(CANDY_MACHINE_PROGRAM),
+                  wallet.publicKey || new PublicKey(CANDY_MACHINE_PROGRAM),
                 //@ts-ignore
                 signTransaction: wallet.signTransaction,
               }}
@@ -211,7 +231,8 @@ const Home = (props: HomeProps) => {
               onMint={onMint}
             />
           )}
-      </MintContainer>}
+        </MintContainer>
+      }
 
       <Snackbar
         open={alertState.open}

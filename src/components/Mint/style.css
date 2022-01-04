@@ -1,0 +1,52 @@
+.mint {
+  max-width: 600px;
+  /* min-height: 400px; */
+  border-radius: 10px;
+  margin: 0 auto;
+  background-color: #0101024d;
+  padding: 20px;
+}
+
+.logo {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 300px;
+}
+
+.gif {
+  border-radius: 10px;
+  display: block;
+  margin-left: auto;
+  width: 80%;
+}
+
+.tittle {
+  text-shadow: 2px 2px #0c0c0c;
+}
+
+.desc {
+  text-shadow: 1px 1px #0c0c0c;
+}
+
+@media only screen and (max-width: 770px) {
+  .gif {
+    margin-top: 20px;
+    width: 80vw;
+    margin-left: 25px;
+  }
+  .row {
+    height: auto !important;
+  }
+  .tittle {
+    text-align: center;
+    font-size: 40px;
+    margin-top: 20px;
+  }
+  .mint-btn {
+    text-align: center;
+  }
+  .price {
+    text-align: center;
+  }
+}
